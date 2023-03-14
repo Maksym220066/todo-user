@@ -1,31 +1,37 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
-import HomeView from '../views/HomeView.vue'
+import Vue from 'vue';
+import VueRouter from 'vue-router';
+import store from "@/store";
 
-Vue.use(VueRouter)
+
+Vue.use(VueRouter);
 
 const routes = [
-  {
-    path: '/',
-    name: 'home',
-    component: HomeView
-  },
-  {
-    path: '/about',
-    name: 'about',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: function () {
-      return import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
+    {
+        path: '/',
+        name: 'MainPage',
+        component: function () {
+            return import('../views/MainPage.vue');
+        }
+    },
+    {
+        path: '/login',
+        name: 'Login',
+        component: function () {
+            return import('../views/LoginForm.vue');
+        }
     }
-  }
-]
+];
 
 const router = new VueRouter({
-  mode: 'history',
-  base: process.env.BASE_URL,
-  routes
-})
-
-export default router
+    mode: 'history',
+    base: process.env.BASE_URL,
+    routes
+});
+router.beforeEach((to, from, next) => {
+    const user = localStorage.getItem('user');
+    if (user) store.commit('setUser', JSON.parse(user));
+    const {user: currentUser} = store.state;
+    if (!currentUser && to.name !== 'Login') next({name: 'Login'});
+    else next();
+});
+export default router;

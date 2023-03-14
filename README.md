@@ -1,24 +1,17 @@
-# test-log-in-user
+# Instruction Log in
 
-## Project setup
-```
-npm install
-```
+This project is a web application that allows users to log in and view their personal information. The application was
+built using Vue.js and the Vuetify component library.
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+Users can log in using their username and phone number, which can be found on the
+site [Users](https://jsonplaceholder.typicode.com/users). To access the login credentials, navigate to the site and
+select a user
+from the list. The username and phone number will be displayed on the user's profile page.
 
-### Compiles and minifies for production
-```
-npm run build
-```
+## Input Restrictions
 
-### Lints and fixes files
-```
-npm run lint
-```
+The login field in this application only allows letters. Users should enter their login using only letters, with no
+spaces or special characters.
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+The phone number field only allows symbols and numbers. Users should enter their phone number using only numbers and
+symbols, such as +, -, (, and ). Spaces are allowed.
